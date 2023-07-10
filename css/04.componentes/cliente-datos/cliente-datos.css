@@ -1,0 +1,30 @@
+.cliente-datos {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: space-between;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: var(--gray-scale-n2);
+    padding: 1em;
+}
+
+.cliente-datos p {
+    font-weight: 700;
+}
+
+.cliente-datos__aceptar,
+.cliente-datos__cancelar {
+    box-sizing: border-box;
+    color: var(--white);
+    display: block;
+    width: 100%;
+    background-color: var(--dark-red);
+    margin-bottom: 5px;
+    margin-top: 5px;
+    padding: .4em;
+    font-weight: 700;
+}
+
+

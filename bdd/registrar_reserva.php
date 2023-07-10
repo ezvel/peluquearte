@@ -1,22 +1,24 @@
 <?php 
     include("../conexion/conectar.php");
     
-    $dni = $_POST['dni'];
-    $nombre = $_POST['nombre'];
-    $apellido = $_POST['apellido'];
-    $calendario = $_POST['calendario']; 
-    $hora = $_POST['hora'];
-    $reservado = "reservado";
-    $id_empleado = $_POST['Id_empleado'];
+    setcookie("DNI_CLIENTE", "", time()+3600,"/peluquearte/");
+    setcookie("NOMBRE_CLIENTE", "", time()+3600,"/peluquearte/");
+    setcookie("APELLIDO_CLIENTE", "", time()+3600,"/peluquearte/");
 
-    $sql_insert = "INSERT INTO reservas (DNI, Nombre, Apellido, dia, hora, Estado, Id_empleado ) VALUES ('$dni','$nombre','$apellido','$calendario', '$hora' ,'$reservado' ,'$id_empleado')";
+    $dni = $_POST['dni'];
+    $fecha = $_POST['fecha']; 
+    $hora = $_POST['hora'];
+    $reservado = 1;
+    $dni_peluquero = $_POST['dni_peluquero'];
+
+    $sql_insert = "INSERT INTO reserva (Dni, Dia, Hora, Id_estado, Dni_peluquero, Dni_cliente) VALUES ('$dni','$fecha','$hora','$reservado','$dni_peluquero', '$dni');";
     
     $insertar_reserva = mysqli_query($conexion, $sql_insert);
 
     if($insertar_reserva) {
-        header("location:../turno.php?msj=ok");
+        header("location:../pages/operadores/generar_turno.php?msj=ok");
     } else {
-        header("location:../turno.php?msj=error");
+        header("location:../pages/operadores/generar_turno2.php?msj=error");
     }
 
 ?>

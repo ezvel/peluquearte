@@ -69,8 +69,6 @@
     <link rel="stylesheet" href="../../css/04.componentes/buscador/buscador.css">
     <link rel="stylesheet" href="../../css/04.componentes/buscador/buscador-input.css">
     <link rel="stylesheet" href="../../css/04.componentes/buscador/buscador-boton.css">
-    <link rel="stylesheet" href="../../css/04.componentes/buscar-cliente/buscar-cliente.css">
-    <link rel="stylesheet" href="../../css/04.componentes/cliente-datos/cliente-datos.css">
     <link rel="stylesheet" href="../../css/05.utilidades/utilidades.css"> 
     
     <!--font awesome-->
@@ -100,25 +98,54 @@
     </nav>
     <main class="main" id="main">
         <header class="main-header">
-            <h2 class="main-header-titulo">Operadores > Buscar cliente</h2>
+            <h2 class="main-header-titulo">Operadores > Buscar cliente >Generar turno</h2>
         </header>
         <section class="main-contenido main-contenido-centrado">
-            <form class="buscador" action="../../bdd/buscar_cliente.php" method="post">
-                <input class="buscador__input" type="number" name="dni" placeholder="Ingrese DNI del cliente">
-                <input class="buscador__boton" type="submit" value="Buscar">
+            <form  class="main-form form" action="../../bdd/registrar_reserva.php" method="post" id="Turno" name="formulario" autocomplete="off">   
+                <section class="form__datos">
+                    <label class="form__label--font-size-grande">DNI</label>
+                    <input class="form__input" id="DNI" type="number" name="dni" autocomplete="off" value="<?php echo $_COOKIE['DNI_CLIENTE'] ?>" readonly3>            
+                    <label class="form__label--font-size-grande">Nombre</label>
+                    <input class="form__input" id="nombre" type="text" name="nombre" autocomplete="off" value="<?php echo $_COOKIE['NOMBRE_CLIENTE'] ?>" readonly>
+                    <label class="form__label--font-size-grande">Apellido</label> 
+                    <input class="form__input" id="apellido" type="text" name="apellido" autocomplete="off" value="<?php echo $_COOKIE['DNI_CLIENTE'] ?>" readonly>   
+                    <label class="form__label--font-size-grande">Seleccionar fecha del turno: </label>
+                    <input class="form__input" type="text" name="fecha" id= "dia">
+                    <label class="form__label--font-size-grande">Hora:</label>
+                    <input class="form__input" type="text" id="hora" name="hora">
+                    <label class="form__label--font-size-grande">Seleccionar estado: </label>
+                    <select class="form__select" id="estado" name="estado" disabled>
+                        <option value="reservado">reservado</option>
+                    </select>   
+                    <label class="form__label form__label--font-size-grande">Seleccionar peluquero: </label>
+                    <select class="form__select" name="dni_peluquero" id="Id_empleado">
+                    <?php
+                        
+                       // Hacer la consulta incluyendo el campo id_empleado
+                       $sql = 'SELECT Dni, Nombre, Apellido FROM usuario WHERE Id_nivel = 1'; 
+                       $result = mysqli_query($conexion, $sql);
+                        
+                       // Comprobar si la consulta tuvo éxito
+                       if ($result) {
+                       // Recorrer todas las filas del resultado
+                       while ($row = mysqli_fetch_assoc($result)) {
+                           // Crear una opción con el valor del campo id_empleado y el texto del campo Nombre
+                           echo "<option value='" . $row["Dni"] . "'>" . $row["Nombre"] . " " . $row["Apellido"] . " " . "</option>";
+                           //echo "<option value='" . $row["id_empleado"] . "'>" . $row["Nombre"] . "</option>";
+                       }
+                       } else {
+                       // Mostrar un mensaje de error
+                       echo "Error al hacer la consulta: " . mysqli_error($conexion);
+                       }   
+                    ?>        
+                        
+                    </select>           
+                </section>
+                <section class="form__botones">
+                    <input class="form__botones__boton form__botones__boton--enviar" type="submit" value="Generar turno">             
+                    <input class="form__botones__boton form__botones__boton--enviar" type="reset" value="Resetear">             
+                </section>
             </form>
-            <?php
-            error_reporting(0);
-            if(isset($_COOKIE["DNI_CLIENTE"])) {
-                echo "<div class='cliente-datos'>";
-                echo "<p>" . $_COOKIE["DNI_CLIENTE"] . "</p>";
-                echo "<p>" . $_COOKIE["NOMBRE_CLIENTE"] . "</p>";
-                echo "<p>" . $_COOKIE["APELLIDO_CLIENTE"] . "</p>";
-                echo "<a class='cliente-datos__aceptar' href='generar_turno2.php'>Aceptar</a>";
-                echo "<a class='cliente-datos__cancelar' href='destruir_cookie.php'>Rechazar</a>";
-                echo "</div>";
-            }
-            ?>
             <div class="alerta" id="alerta">
                 <p class="alerta__item" id = "dniMensaje"></p>
                 <p class="alerta__item" id = "nombreMensaje"></p>
