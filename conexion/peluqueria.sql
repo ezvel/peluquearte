@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 09-07-2023 a las 10:53:50
+-- Tiempo de generación: 10-07-2023 a las 20:13:48
 -- Versión del servidor: 11.0.2-MariaDB-log
 -- Versión de PHP: 8.2.8
 
@@ -80,6 +80,15 @@ CREATE TABLE `reserva` (
   `Dni_cliente` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `reserva`
+--
+
+INSERT INTO `reserva` (`Id`, `Dni`, `Dia`, `Hora`, `Id_estado`, `Dni_peluquero`, `Dni_cliente`) VALUES
+(1, 65453523, '2020 - 07 - 11', '10:30', 2, 43234634, 65453523),
+(2, 65453523, '2023 - 07 - 24', '20:30', 2, 65463521, 65453523),
+(3, 25342636, '2023 - 11 - 23', '07:30', 1, 43234634, 25342636);
+
 -- --------------------------------------------------------
 
 --
@@ -101,7 +110,14 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`Dni`, `Nombre`, `Apellido`, `Usuario`, `Contraseña`, `Id_nivel`, `Ruta`) VALUES
-(123213123, 'Alex', 'Suprun', 'alex777', '1234', 3, '/srv/http/peluquearte/assets/imagenes/users/alex-suprun-ZHvM3XIOHoE-unsplash.jpg');
+(21212343, 'Jake', 'Nackos', 'Jake Nackos', 'admin', 3, '../../assets/imagenes/users/jake-nackos-IF9TK5Uy-KI-unsplash.jpg'),
+(23273682, 'Aiony', 'Haust', 'ay8', '1234', 0, '../../assets/imagenes/users/aiony-haust-3TLl_97HNJo-unsplash.jpg'),
+(23456352, 'Lucas', 'Godina', 'lucgodina', 'ope123', 2, '../../assets/imagenes/users/lukas-godina-wNB3DFN3u9Q-unsplash.jpg'),
+(25342636, 'Jurica', 'Koletic', 'juric1', '1234', 0, '../../assets/imagenes/users/jurica-koletic-7YVZYZeITc8-unsplash.jpg'),
+(33212343, 'Christopher', 'Campbell', 'Chris Camp', '1234', 3, '../../assets/imagenes/users/christopher-campbell-rDEOVtE7vOs-unsplash.jpg'),
+(43234634, 'Michael', 'Dam', 'dami2', 'pelu444', 1, '../../assets/imagenes/users/michael-dam-mEZ3PoFGs_k-unsplash.jpg'),
+(65453523, 'Carlos', 'Sanchez', 'carlitos27', '1234', 0, '../../assets/imagenes/users/iheb-ab-OBufvGMaBaQ-unsplash.jpg'),
+(65463521, 'Nicolas', 'Horn', 'nichorn', 'peulq123', 1, '../../assets/imagenes/users/nicolas-horn-MTZTGvDsHFY-unsplash.jpg');
 
 --
 -- Índices para tablas volcadas
@@ -135,6 +151,16 @@ ALTER TABLE `reserva`
 ALTER TABLE `usuario`
   ADD PRIMARY KEY (`Dni`),
   ADD KEY `usuario_ibfk_1` (`Id_nivel`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `reserva`
+--
+ALTER TABLE `reserva`
+  MODIFY `Id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Restricciones para tablas volcadas
