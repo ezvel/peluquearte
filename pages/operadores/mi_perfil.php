@@ -95,7 +95,7 @@
     </nav>
     <main class="main">
         <header class="main-header">
-            <h2 class="main-header-titulo">Mis Datos</h2>
+            <h2 class="main-header-titulo">Operadores > Mi perfil</h2>
         </header>
         <section class="main-contenido main-contenido-centrado">
             <input type="submit" value="Modificar" onclick="activarInput()"> 
