@@ -4,10 +4,10 @@ include('../conexion/conectar.php');
 
 $id_reserva = $_GET['id_reserva'];
 
-$sql_actualizar = "UPDATE reservas SET estado = 'Cancelado' WHERE Id_Reserva = '$id_reserva'";
+$sql_actualizar = "UPDATE reserva SET Id_estado = 0 WHERE Id = '$id_reserva'";
 
 mysqli_query($conexion, $sql_actualizar);
 
-header("location:../ver_mis_turnos.php");
+header("location:../pages/operadores/consultar_turnos.php");
 
 ?>

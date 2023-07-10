@@ -1,6 +1,9 @@
 .tabla__fila {
-    height: 3rem;
+    height: 1rem;
+    border-bottom: 10px solid var(--white);
+    
 }
+
 
 .tabla__fila--par {
     background-color: var(--gray-scale-n2);

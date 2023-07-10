@@ -1,8 +1,10 @@
 .tabla {
-    width: 100%;
-    min-width: 1200px;
-    min-height: 100vh;
-    border: none;
-    background-color: var(--gray-scale-n3);
+    width: 90%;
+    min-width: 100vh;
+    min-width: 1104px;
+    margin-left: 2rem;
+    background-color: var(--gray-scale-n2);
     font-size: 1rem;
+    border-collapse: collapse;
+    
 }

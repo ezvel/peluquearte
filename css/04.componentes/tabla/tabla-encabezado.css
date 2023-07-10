@@ -1,4 +1,8 @@
 .tabla__encabezado {
     height: 4rem;
     text-transform: uppercase;
+    border-bottom: 10px solid var(--white);
+    background-color: #333;
+    color: var(--white);
+
 }

@@ -1,5 +1,5 @@
 .tabla__celda {
-    width: 10rem;
+    width: 15rem;
     text-align: center;
 }
 
@@ -14,5 +14,6 @@
     align-items: center;
     padding-left: 1.45rem;
     padding-top: 1.45rem;
+    padding-bottom: 1.45rem;
     gap: .5rem;
 }
