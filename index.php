@@ -25,13 +25,15 @@
     <link rel="stylesheet" href="css/04.componentes/form/form-label.css">
     <link rel="stylesheet" href="css/04.componentes/form/form-botones.css">
     <link rel="stylesheet" href="css/04.componentes/form/form-botones-boton.css">
-    <link rel="stylesheet" href="css/04.componentes/mensaje/mensaje-link.css">   
+    <link rel="stylesheet" href="css/04.componentes/mensaje/mensaje-link.css"> 
+    <link rel="stylesheet" href="css/03.secciones/main.css">   
+  
 
     <title>Peluquearte | Iniciar sesión</title>
 </head>
 <body>
-    <main>
-        <form class=form action="bdd/iniciar_sesion.php" method="POST">
+    <main class="main-logueo">
+        <form class="form-logueo" action="bdd/iniciar_sesion.php" method="POST">
             <h1 class=form__titulo>Iniciar sesión</h1>
             <div class="form__datos">
                 <label class="form__label" for="usuario">Usuario</label>
@@ -44,7 +46,7 @@
                 <input class="form__botones__boton form__botones__boton--enviar" type="submit" value="Iniciar sesión">
             </div>       
         </form>      
-        <p class="mensaje">
+        <p class="mensaje" style="text-align:center"> 
             ¿No tienes una cuenta?<a class="mensaje__link" href="registro.php"> Puede registrarse aquí</a>
         </p>
         <?php

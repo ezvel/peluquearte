@@ -1,7 +1,24 @@
 .form {
+    box-sizing: content-box;
     font-size: 16px !important;
     min-width: 300px;
     max-width: 500px;
     width: 80%;
+    margin-left: auto;
+    margin-right: auto;
     background-color: var(--gray-scale-n2);
+    padding: 5em;
+    margin-bottom: 2em;
+}
+
+.form-logueo {
+    box-sizing: border-box;
+    font-size: 16px !important;
+    min-width: 300px;
+    max-width: 500px;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: var(--gray-scale-n2);
+    padding: 3em 5em;
 }

@@ -3,11 +3,26 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     min-height: 100vh;
-    margin-top: 50px;
-    padding-top: 10rem;
+    padding-top: 8vh;
+}
+
+.main-logueo {
+    box-sizing: content-box;
+    padding: 2em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+@media screen and (min-width: 768px) {
+    .main {
+        margin-left: 100px;
+    }
 }
 
 @media screen and (min-width: 1024px) {
@@ -15,3 +30,10 @@
         margin-left: 350px;
     }
 }
+
+.main--agregar-margin {
+    margin-left: 2rem;
+}
+
+
+

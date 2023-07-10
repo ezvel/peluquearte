@@ -1,0 +1,9 @@
+.buscador__boton {
+    box-sizing: content-box;
+    padding: .65em 1em;
+    border-radius: 0;
+    border: none;
+    background-color: var(--dark-red);
+    color: var(--white);
+    font-weight: 700;
+}

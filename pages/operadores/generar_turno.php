@@ -66,6 +66,9 @@
     <link rel="stylesheet" href="../../css/04.componentes/usuario/usuario.css">
     <link rel="stylesheet" href="../../css/04.componentes/usuario/usuario-imagen.css">
     <link rel="stylesheet" href="../../css/04.componentes/usuario/usuario-nombre.css">
+    <link rel="stylesheet" href="../../css/04.componentes/buscador/buscador.css">
+    <link rel="stylesheet" href="../../css/04.componentes/buscador/buscador-input.css">
+    <link rel="stylesheet" href="../../css/04.componentes/buscador/buscador-boton.css">
     <link rel="stylesheet" href="../../css/05.utilidades/utilidades.css"> 
     
     <!--font awesome-->
@@ -93,11 +96,15 @@
             <li class="menu__item"><a class="menu__link" href="consultar_turnos.php"><svg class="menu__icon" xmlns="http://www.w3.org/2000/svg" fill="#FFFFFF" height="40" viewBox="0 -960 960 960" width="40"><path d="M780-345v-105H180v105h600Zm0-165v-105H180v105h600Zm0-165v-105H180v105h600ZM180-120q-24 0-42-18t-18-42v-600q0-24 18-42t42-18h600q24 0 42 18t18 42v600q0 24-18 42t-42 18H180Zm600-60v-105H180v105h600Z"/></svg>Consultar turnos</a></li>
         </ul>
     </nav>
-    <main class="main">
+    <main class="main" id="main">
         <header class="main-header">
-            <h2 class="main-header-titulo">Generar turnos</h2>
+            <h2 class="main-header-titulo">Operadores > Generar turno</h2>
         </header>
         <section class="main-contenido main-contenido-centrado">
+            <form class="buscador" action="../../bdd/buscar_cliente.php" method="post">
+                <input class="buscador__input" type="number" name="dni" placeholder="Ingrese DNI del cliente">
+                <input class="buscador__boton" type="submit" value="Buscar">
+            </form>
             <form  class="main-form form" action="../../bdd/registrar_reserva.php" method="post" id="Turno" name="formulario" autocomplete="off">   
                 <section class="form__datos">
                     <label class="form__label--font-size-grande">DNI</label>
@@ -140,6 +147,7 @@
                 </section>
                 <section class="form__botones">
                     <input class="form__botones__boton form__botones__boton--enviar" type="submit" value="Generar turno">             
+                    <input class="form__botones__boton form__botones__boton--enviar" type="reset" value="Resetear">             
                 </section>
             </form>
             <div class="alerta" id="alerta">

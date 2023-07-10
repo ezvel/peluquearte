@@ -1,0 +1,9 @@
+.buscador__input {
+    font-weight: 700;
+    box-sizing: content-box;
+    padding: .5em 1em;
+    width: 400px;
+    border-radius: 0;
+    border: 1px solid var(--gray-scale-n2);
+    background-color: var(--gray-scale-n2);
+}

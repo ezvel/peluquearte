@@ -27,13 +27,14 @@
     <link rel="stylesheet" href="css/04.componentes/form/form-label.css">
     <link rel="stylesheet" href="css/04.componentes/form/form-botones.css">
     <link rel="stylesheet" href="css/04.componentes/form/form-botones-boton.css">
-    <link rel="stylesheet" href="css/04.componentes/mensaje/mensaje-link.css">   
+    <link rel="stylesheet" href="css/04.componentes/mensaje/mensaje-link.css"> 
+    <link rel="stylesheet" href="css/03.secciones/main.css">   
     
     <title>Peluquería | Registrarse</title>
 </head>
 <body>
-    <main>
-        <form class="form" id="Empleado" action="bdd/registrar_usuario.php" method="post" enctype="multipart/form-data">
+    <main class="main-logueo">
+        <form class="form-logueo" id="Empleado" action="bdd/registrar_usuario.php" method="post" enctype="multipart/form-data">
             <h1 class="form__titulo">Registrarse</h1>
             <div class="form__datos">
                 <label class="form__label" for="nombre">Nombre</label>
