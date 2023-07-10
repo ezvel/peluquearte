@@ -47,10 +47,10 @@
                 <label class="form__label" for="password">Contraseña</label>
                 <input class="form__input" type="password" id="password" name="password" required>
                 <label class="form__label" for="foto-perfil">Foto</label>
-                <input class="form__input" type="file" id="foto-perfil" name="}}" required>
+                <input class="form__input" type="file" id="foto-perfil" name="foto-perfil" required>
                 <select class="form__input" name="nivel" id="nivel">
                     <?php
-                        $sql = "SELECT Id, Descripcion FROM nivel WHERE Id > 0";
+                        $sql = "SELECT Id, Descripcion FROM nivel;";
                         $consulta = mysqli_query($conexion, $sql);
                        // Comprobar si la consulta tuvo éxito
                         if ($consulta) {

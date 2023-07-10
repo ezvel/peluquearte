@@ -98,7 +98,7 @@
             <h2 class="main-header-titulo">Generar turnos</h2>
         </header>
         <section class="main-contenido main-contenido-centrado">
-            <form  class="main-form form" action="bdd/registrar_reserva.php" method="post" id="Turno" name="formulario" autocomplete="off">   
+            <form  class="main-form form" action="../../bdd/registrar_reserva.php" method="post" id="Turno" name="formulario" autocomplete="off">   
                 <section class="form__datos">
                     <label class="form__label--font-size-grande">DNI</label>
                     <input class="form__input" id="DNI" type="number" name="dni" autocomplete="off" >            
@@ -114,25 +114,26 @@
                     <select class="form__select" id="estado" name="estado" disabled>
                         <option value="reservado">reservado</option>
                     </select>   
-                    <label class="form__label form__label--font-size-grande">Seleccionar empleado: </label>
+                    <label class="form__label form__label--font-size-grande">Seleccionar peluquero: </label>
                     <select class="form__select" name="Id_empleado" id="Id_empleado">
                     <?php
-                    
+                        
                        // Hacer la consulta incluyendo el campo id_empleado
-                       $result = mysqli_query($conexion, 'SELECT id_empleado, Nombre, Apellido FROM empleado');
-
+                       $sql = 'SELECT Dni, Nombre, Apellido FROM usuario WHERE Id_nivel = 1'; 
+                       $result = mysqli_query($conexion, $sql);
+                        
                        // Comprobar si la consulta tuvo éxito
                        if ($result) {
                        // Recorrer todas las filas del resultado
                        while ($row = mysqli_fetch_assoc($result)) {
                            // Crear una opción con el valor del campo id_empleado y el texto del campo Nombre
-                           echo "<option value='" . $row["id_empleado"] . "'>" . $row["Nombre"] . " " . $row["Apellido"] . " " . "</option>";
+                           echo "<option value='" . $row["Dni"] . "'>" . $row["Nombre"] . " " . $row["Apellido"] . " " . "</option>";
                            //echo "<option value='" . $row["id_empleado"] . "'>" . $row["Nombre"] . "</option>";
                        }
                        } else {
                        // Mostrar un mensaje de error
                        echo "Error al hacer la consulta: " . mysqli_error($conexion);
-                       }    
+                       }   
                     ?>        
                         
                     </select>           

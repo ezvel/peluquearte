@@ -102,7 +102,7 @@
             <div class="main-contenido-tabla">
                 <?php 
                     // Ejecutar la consulta de reservas
-                    $sql = "SELECT reservas.Id_Reserva, reservas.DNI, reservas.Nombre, reservas.Apellido, reservas.Dia, reservas.Hora, empleado.Nombre, empleado.Apellido, reservas.Estado FROM reservas inner join empleado on reservas.Id_empleado = empleado.Id_empleado";
+                    $sql = "SELECT reserva.Id, reserva.Dni, reserva.Nombre, reservas.Apellido, reservas.Dia, reservas.Hora, empleado.Nombre, empleado.Apellido, reservas.Estado FROM reservas inner join empleado on reservas.Id_empleado = empleado.Id_empleado";
                     $resultado = mysqli_query($conexion, $sql) or die("Error al ejecutar la consulta");
 
                     // Mostrar la consulta en una tabla
@@ -151,7 +151,7 @@
                     echo "</table>";
 
                     // Cerrar la conexión
-                    mysqli_close($conexion);
+                    //mysqli_close($conexion);
                 ?>
             </div>
         </section>
