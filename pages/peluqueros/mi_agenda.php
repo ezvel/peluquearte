@@ -79,6 +79,14 @@
     <link rel="stylesheet" href="../../css/04.componentes/usuario/usuario-imagen.css">
     <link rel="stylesheet" href="../../css/04.componentes/usuario/usuario-nombre.css">
     <link rel="stylesheet" href="../../css/05.utilidades/utilidades.css"> 
+    <link rel="stylesheet" href="../../css/04.componentes/tabla/tabla.css"> 
+    <link rel="stylesheet" href="../../css/04.componentes/tabla/tabla-encabezado.css">
+    <link rel="stylesheet" href="../../css/04.componentes/tabla/tabla-fila.css">
+    <link rel="stylesheet" href="../../css/04.componentes/tabla/tabla-celda.css">
+    <link rel="stylesheet" href="../../css/04.componentes/acciones/acciones.css">
+    <link rel="stylesheet" href="../../css/04.componentes/acciones/acciones-confirmar.css">
+    <link rel="stylesheet" href="../../css/04.componentes/acciones/acciones-cancelar.css">
+    <link rel="stylesheet" href="../../css/04.componentes/estado/estado.css">
     
     <!--font awesome-->
     <script src="https://kit.fontawesome.com/6911c92bee.js" crossorigin="anonymous"></script>
@@ -104,59 +112,64 @@
             <li class="menu__item"><a class="menu__link" href="mi_agenda.php"><svg class="menu__icon" xmlns="http://www.w3.org/2000/svg" fill="#FFFFFF" height="40" viewBox="0 -960 960 960" width="40"><path d="M220-80q-24 0-42-18t-18-42v-680q0-24 18-42t42-18h520q24 0 42 18t18 42v680q0 24-18 42t-42 18H220Zm0-60h520v-680h-60v266l-97-56-97 56v-266H220v680Zm0 0v-680 680Zm266-414 97-56 97 56-97-56-97 56Z"/></svg>Mi agenda</a></li>
         </ul>
     </nav>
-    <main class="main">
-    <header class="main-header">
-            <h2 class="main-header-titulo">Agenda</h2>
+    <main class="main" id="main">
+        <header class="main-header">
+            <h2 class="main-header-titulo">Peluqueros > Mi agenda</h2>
         </header>
-        <section class="main-contenido main-contenido-centrado">
-        <div class="main-contenido-tabla">
-         <?php 
-         $sql =   "SELECT reserva.Id, usuario.Nombre, reserva.Dia, reserva.Hora, usuario.Apellido AS Peluquero, estado.Descripcion AS Estado
-         FROM reserva
-         INNER JOIN usuario ON reserva.Dni_peluquero = usuario.Dni
-         INNER JOIN estado ON reserva.Id_estado = estado.Id";
-         $resultagenda =  mysqli_query($conexion, $sql) or die("Error al ejecutar la consulta");
-         if ($resultagenda->num_rows > 0) {
-         echo "<table>";
-         echo "<thead>";
-         echo "<tr>";
-         echo "<th scope=col>Id</th>";
-         echo "<th scope=col>Nombre</th>";
-         echo "<th scope=col>Dia</th>";
-         echo "<th scope=col>Hora</th>";
-         echo "<th scope=col>Peluquero</th>";
-         echo "<th scope=col>Estado</th>";
-         echo "<tr>";
-         echo "</thead>";
-         while ($info = $resultagenda->fetch_assoc()) {
-            $idReserva = $info["Id"];
-            $nombre = $info["Nombre"];
-            $dia = $info["Dia"];
-            $hora = $info["Hora"];
-            $peluquero = $info["Peluquero"];
-            $estado = $info["Estado"];
-            
-            $colorEstado = obtenerColorEstado($estado);
+        <section class="main-contenido">
+            <div class="main-contenido-tabla">
+                <?php 
+                    // Ejecutar la consulta de reservas
+                    $sql = "SELECT reserva.Id, reserva.Dni, usuario.Nombre, usuario.Apellido, reserva.Dia, reserva.Hora, reserva.Dni_peluquero, reserva.Id_estado FROM reserva inner join usuario on reserva.Dni_cliente = usuario.Dni WHERE usuario.Id_nivel = 0;";
+                    $resultado = mysqli_query($conexion, $sql) or die("Error al ejecutar la consulta");
 
-            echo "<tbody>";
-            echo "<tr>";
-            echo "<td>$idreserva</td>";
-            echo "<td>$nombre</td>";
-            echo "<td>$dia</td>";
-            echo "<td>$hora</td>";
-            echo "<td>$peluquero</td>";
-            echo "<td><div style='width: 20px; height: 20px; border-radius: 50%; background-color: $colorEstado;'></div></td>";
-            echo "</tr>";
-            echo "</tbody>";
-        }
-        echo "</table>";
-    }else{ 
-        echo "No se encontraron registros.";
-    }
-    mysqli_close($conexion);
+                    // Mostrar la consulta en una tabla
+                    echo "<table class='tabla'>";
+                    echo "<tr class='tabla__encabezado'><th class='tabla__celda'>Reserva</th><th class='tabla__celda'>DNI</th><th class='tabla__celda'>Nombre</th><th class='tabla__celda'>Dia</th><th class='tabla__celda'>Hora</th><th class='tabla__celda'>Peluquero/a</th><th class='tabla__celda'>Estado</th></tr>";
+                    $contador = 0;
+                    while ($fila = mysqli_fetch_row($resultado)) {
+                        if($contador % 2 == 0) {
+                            echo "<tr class='tabla__fila tabla__fila--par'>";
+                            echo "<td class='tabla__celda tabla__celda--negrita'>" . $fila[0] . "</td>";
+                            echo "<td class='tabla__celda'>" . $fila[1] . "</td>";
+                            echo "<td class='tabla__celda'>" . $fila[2] . " " . $fila[3] . "</td>";
+                            echo "<td class='tabla__celda'>" . $fila[4] . "</td>";
+                            echo "<td class='tabla__celda'>" . $fila[5] . "</td>";
+                            echo "<td class='tabla__celda'>" . $fila[6] . "</td>";
+                            if($fila[7] == 2) {
+                                echo "<td class='tabla__celda'>" . "<div class='estado estado--confirmado'></div>"  . "</td>";
+                            } else if ($fila[7] == 1) {
+                                echo "<td class='tabla__celda'>" . "<div class='estado estado--reservado'></div>"  . "</td>";
+                            } else { //cancelado
+                                echo "<td class='tabla__celda'>" . "<div class='estado estado--cancelado'></div>" . "</td>";
+                            }
+                            echo "</tr>";
+                        } else {
+                            echo "<tr class='tabla__fila tabla__fila--impar'>";
+                            echo "<td class='tabla__celda tabla__celda--negrita'>" . $fila[0] . "</td>";
+                            echo "<td class='tabla__celda'>" . $fila[1] . "</td>";
+                            echo "<td class='tabla__celda'>" . $fila[2] . " " . $fila[3] . "</td>";
+                            echo "<td class='tabla__celda'>" . $fila[4] . "</td>";
+                            echo "<td class='tabla__celda'>" . $fila[5] . "</td>";
+                            echo "<td class='tabla__celda'>" . $fila[6] . "</td>";
+                            if($fila[7] == 2) {
+                                echo "<td class='tabla__celda'>" . "<div class='estado estado--confirmado'></div>"  . "</td>";
+                            } else if ($fila[7] == 1) {
+                                echo "<td class='tabla__celda'>" . "<div class='estado estado--reservado'></div>"  . "</td>";
+                            } else { //cancelado
+                                echo "<td class='tabla__celda'>" . "<div class='estado estado--cancelado'></div>" . "</td>";
+                            }
+                            echo "</tr>";
+                        }
 
-         ?>
-        </div>               
+                        $contador++;
+                    }
+                    echo "</table>";
+
+                    // Cerrar la conexión
+                    //mysqli_close($conexion);
+                ?>
+            </div>
         </section>
     </main>
     <?php

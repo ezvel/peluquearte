@@ -67,6 +67,14 @@
     <link rel="stylesheet" href="../../css/04.componentes/usuario/usuario-imagen.css">
     <link rel="stylesheet" href="../../css/04.componentes/usuario/usuario-nombre.css">
     <link rel="stylesheet" href="../../css/05.utilidades/utilidades.css"> 
+    <link rel="stylesheet" href="../../css/04.componentes/tabla/tabla.css"> 
+    <link rel="stylesheet" href="../../css/04.componentes/tabla/tabla-encabezado.css">
+    <link rel="stylesheet" href="../../css/04.componentes/tabla/tabla-fila.css">
+    <link rel="stylesheet" href="../../css/04.componentes/tabla/tabla-celda.css">
+    <link rel="stylesheet" href="../../css/04.componentes/acciones/acciones.css">
+    <link rel="stylesheet" href="../../css/04.componentes/acciones/acciones-confirmar.css">
+    <link rel="stylesheet" href="../../css/04.componentes/acciones/acciones-cancelar.css">
+    <link rel="stylesheet" href="../../css/04.componentes/estado/estado.css">
     
     <!--font awesome-->
     <script src="https://kit.fontawesome.com/6911c92bee.js" crossorigin="anonymous"></script>
@@ -94,15 +102,15 @@
             <li class="menu__item"><a class="menu__link" href="consultar_turnos.php"><svg class="menu__icon" xmlns="http://www.w3.org/2000/svg" fill="#FFFFFF" height="40" viewBox="0 -960 960 960" width="40"><path d="M780-345v-105H180v105h600Zm0-165v-105H180v105h600Zm0-165v-105H180v105h600ZM180-120q-24 0-42-18t-18-42v-600q0-24 18-42t42-18h600q24 0 42 18t18 42v600q0 24-18 42t-42 18H180Zm600-60v-105H180v105h600Z"/></svg>Consultar turnos</a></li>
         </ul>
     </nav>
-    <main class="main">
+    <main class="main" id="main">
         <header class="main-header">
-            <h2 class="main-header-titulo">Mis turnos</h2>
+            <h2 class="main-header-titulo">Administradores > Consultar turnos</h2>
         </header>
         <section class="main-contenido">
             <div class="main-contenido-tabla">
                 <?php 
                     // Ejecutar la consulta de reservas
-                    $sql = "SELECT reserva.Id, reserva.Dni, reserva.Nombre, reservas.Apellido, reservas.Dia, reservas.Hora, empleado.Nombre, empleado.Apellido, reservas.Estado FROM reservas inner join empleado on reservas.Id_empleado = empleado.Id_empleado";
+                    $sql = "SELECT reserva.Id, reserva.Dni, usuario.Nombre, usuario.Apellido, reserva.Dia, reserva.Hora, reserva.Dni_peluquero, reserva.Id_estado FROM reserva inner join usuario on reserva.Dni_cliente = usuario.Dni WHERE usuario.Id_nivel = 0;";
                     $resultado = mysqli_query($conexion, $sql) or die("Error al ejecutar la consulta");
 
                     // Mostrar la consulta en una tabla
@@ -117,15 +125,15 @@
                             echo "<td class='tabla__celda'>" . $fila[2] . " " . $fila[3] . "</td>";
                             echo "<td class='tabla__celda'>" . $fila[4] . "</td>";
                             echo "<td class='tabla__celda'>" . $fila[5] . "</td>";
-                            echo "<td class='tabla__celda'>" . $fila[6] . " " .  $fila[7] . "</td>";
-                            if($fila[8] == "Confirmado") {
+                            echo "<td class='tabla__celda'>" . $fila[6] . "</td>";
+                            if($fila[7] == 2) {
                                 echo "<td class='tabla__celda'>" . "<div class='estado estado--confirmado'></div>"  . "</td>";
-                            } else if ($fila[8] == "reservado") {
+                            } else if ($fila[7] == 1) {
                                 echo "<td class='tabla__celda'>" . "<div class='estado estado--reservado'></div>"  . "</td>";
                             } else { //cancelado
                                 echo "<td class='tabla__celda'>" . "<div class='estado estado--cancelado'></div>" . "</td>";
                             }
-                            echo "<td class='tabla__celda tabla__celda--display-flex-row'>" . "<form action='bdd/actualizar_estado_a_confirmado.php' method='get'><textarea class='oculto' name='id_reserva'>$fila[0]</textarea><button class='acciones acciones--confirmar' type='submit'><img src='assets/iconos/confirmar.svg'></button></form>" . "<form action='bdd/actualizar_estado_a_cancelado.php' method='get'><textarea class='oculto' name='id_reserva'>$fila[0]</textarea><button class='acciones acciones--cancelar' type='submit'><img src='assets/iconos/cancelar.svg'></button></form>". "</td>";
+                            echo "<td class='tabla__celda tabla__celda--display-flex-row'>" . "<form action='../../bdd/actualizar_estado_a_confirmado_desdeadmin.php' method='get'><textarea class='oculto' name='id_reserva'>$fila[0]</textarea><button class='acciones acciones--confirmar' type='submit'><img src='../../assets/iconos/confirmar.svg'></button></form>" . "<form action='../../bdd/actualizar_estado_a_cancelado_desdeadmin.php' method='get'><textarea class='oculto' name='id_reserva'>$fila[0]</textarea><button class='acciones acciones--cancelar' type='submit'><img src='../../assets/iconos/cancelar.svg'></button></form>". "</td>";
                             echo "</tr>";
                         } else {
                             echo "<tr class='tabla__fila tabla__fila--impar'>";
@@ -134,15 +142,15 @@
                             echo "<td class='tabla__celda'>" . $fila[2] . " " . $fila[3] . "</td>";
                             echo "<td class='tabla__celda'>" . $fila[4] . "</td>";
                             echo "<td class='tabla__celda'>" . $fila[5] . "</td>";
-                            echo "<td class='tabla__celda'>" . $fila[6] . " " .  $fila[7] . "</td>";
-                            if($fila[8] == "Confirmado") {
+                            echo "<td class='tabla__celda'>" . $fila[6] . "</td>";
+                            if($fila[7] == 2) {
                                 echo "<td class='tabla__celda'>" . "<div class='estado estado--confirmado'></div>"  . "</td>";
-                            } else if ($fila[8] == "reservado") {
+                            } else if ($fila[7] == 1) {
                                 echo "<td class='tabla__celda'>" . "<div class='estado estado--reservado'></div>"  . "</td>";
                             } else { //cancelado
                                 echo "<td class='tabla__celda'>" . "<div class='estado estado--cancelado'></div>" . "</td>";
                             }
-                            echo "<td class='tabla__celda tabla__celda--display-flex-row'>" . "<form action='bdd/actualizar_estado_a_confirmado.php' method='get'><textarea class='oculto' name='id_reserva'>$fila[0]</textarea><button class='acciones acciones--confirmar' type='submit'><img src='assets/iconos/confirmar.svg'></button></form>" . "<form action='bdd/actualizar_estado_a_cancelado.php' method='get'><textarea class='oculto' name='id_reserva'>$fila[0]</textarea><button class='acciones acciones--cancelar' type='submit'><img src='assets/iconos/cancelar.svg'></button></form>". "</td>";
+                            echo "<td class='tabla__celda tabla__celda--display-flex-row'>" . "<form action='../../bdd/actualizar_estado_a_confirmado_desdeadmin.php' method='get'><textarea class='oculto' name='id_reserva'>$fila[0]</textarea><button class='acciones acciones--confirmar' type='submit'><img src='../../assets/iconos/confirmar.svg'></button></form>" . "<form action='../../bdd/actualizar_estado_a_cancelado_desdeadmin.php' method='get'><textarea class='oculto' name='id_reserva'>$fila[0]</textarea><button class='acciones acciones--cancelar' type='submit'><img src='../../assets/iconos/cancelar.svg'></button></form>". "</td>";
                             echo "</tr>";
                         }
 

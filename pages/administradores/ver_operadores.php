@@ -66,7 +66,15 @@
     <link rel="stylesheet" href="../../css/04.componentes/usuario/usuario.css">
     <link rel="stylesheet" href="../../css/04.componentes/usuario/usuario-imagen.css">
     <link rel="stylesheet" href="../../css/04.componentes/usuario/usuario-nombre.css">
-    <link rel="stylesheet" href="../../css/05.utilidades/utilidades.css"> 
+    <link rel="stylesheet" href="../../css/05.utilidades/utilidades.css">
+    <link rel="stylesheet" href="../../css/04.componentes/tabla/tabla.css"> 
+    <link rel="stylesheet" href="../../css/04.componentes/tabla/tabla-encabezado.css">
+    <link rel="stylesheet" href="../../css/04.componentes/tabla/tabla-fila.css">
+    <link rel="stylesheet" href="../../css/04.componentes/tabla/tabla-celda.css">
+    <link rel="stylesheet" href="../../css/04.componentes/acciones/acciones.css">
+    <link rel="stylesheet" href="../../css/04.componentes/acciones/acciones-confirmar.css">
+    <link rel="stylesheet" href="../../css/04.componentes/acciones/acciones-cancelar.css">
+    <link rel="stylesheet" href="../../css/04.componentes/estado/estado.css"> 
     
     <!--font awesome-->
     <script src="https://kit.fontawesome.com/6911c92bee.js" crossorigin="anonymous"></script>
@@ -94,7 +102,47 @@
             <li class="menu__item"><a class="menu__link" href="consultar_turnos.php"><svg class="menu__icon" xmlns="http://www.w3.org/2000/svg" fill="#FFFFFF" height="40" viewBox="0 -960 960 960" width="40"><path d="M780-345v-105H180v105h600Zm0-165v-105H180v105h600Zm0-165v-105H180v105h600ZM180-120q-24 0-42-18t-18-42v-600q0-24 18-42t42-18h600q24 0 42 18t18 42v600q0 24-18 42t-42 18H180Zm600-60v-105H180v105h600Z"/></svg>Consultar turnos</a></li>
         </ul>
     </nav>
-    <main class="main">
+    <main class="main" id="main">
+        <header class="main-header">
+            <h2 class="main-header-titulo">Administradores > Ver operadores</h2>
+        </header>
+        <section class="main-contenido">
+            <div class="main-contenido-tabla">
+                <?php 
+                    // Ejecutar la consulta de reservas
+                    $sql = "SELECT Dni, Nombre, Apellido, Usuario FROM usuario WHERE Id_nivel = 2;";
+                    $resultado = mysqli_query($conexion, $sql) or die("Error al ejecutar la consulta");
+
+                    // Mostrar la consulta en una tabla
+                    echo "<table class='tabla'>";
+                    echo "<tr class='tabla__encabezado'><th class='tabla__celda'>Dni</th><th class='tabla__celda'>Nombre</th><th class='tabla__celda'>Apellido</th><th class='tabla__celda'>Usuario</th></tr>";
+                    $contador = 0;
+                    while ($fila = mysqli_fetch_row($resultado)) {
+                        if($contador % 2 == 0) {
+                            echo "<tr class='tabla__fila tabla__fila--par'>";
+                            echo "<td class='tabla__celda tabla__celda--negrita'>" . $fila[0] . "</td>";
+                            echo "<td class='tabla__celda'>" . $fila[1] . "</td>";
+                            echo "<td class='tabla__celda'>" . $fila[2] . "</td>";
+                            echo "<td class='tabla__celda'>" . $fila[3] . "</td>";
+                            echo "</tr>";
+                        } else {
+                            echo "<tr class='tabla__fila tabla__fila--impar'>";
+                            echo "<td class='tabla__celda tabla__celda--negrita'>" . $fila[0] . "</td>";
+                            echo "<td class='tabla__celda'>" . $fila[1] . "</td>";
+                            echo "<td class='tabla__celda'>" . $fila[2] . "</td>";
+                            echo "<td class='tabla__celda'>" . $fila[3] . "</td>";
+                            echo "</tr>";
+                        }
+
+                        $contador++;
+                    }
+                    echo "</table>";
+
+                    // Cerrar la conexión
+                    //mysqli_close($conexion);
+                ?>
+            </div>
+        </section>
     </main>
     <script type="text/javascript" src="../../js/formulario.js"></script>
     <script type="text/javascript" src="../../js/toggle-menu.js"></script>
