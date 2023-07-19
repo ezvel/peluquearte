@@ -19,12 +19,14 @@ if($registro = mysqli_num_rows($consulta_usuario) === 1) {
 	setcookie("USUARIO",$usuario, time()+3600,"/peluquearte/");
 	$row = mysqli_fetch_row($consulta_usuario);
 
+	$usuario = $row[0];
 	$nombre = $row[2];
 	$apellido = $row[3];
 	$ruta = $row[4];
 	$_SESSION['nombre'] = $nombre;
 	$_SESSION['apellido'] = $apellido;
 	$_SESSION['foto'] = $ruta;
+	$_SESSION['usuario'] = $usuario; 
 
 	echo $ruta;
 

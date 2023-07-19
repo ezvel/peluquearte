@@ -104,7 +104,7 @@
         </header>
         <section class="main-contenido main-contenido-centrado">
             <form class="buscador" action="../../bdd/buscar_cliente.php" method="post">
-                <input class="buscador__input" type="number" name="dni" placeholder="Ingrese DNI del cliente">
+                <input class="buscador__input" type="text" name="dni" placeholder="Ingrese DNI del cliente">
                 <input class="buscador__boton" type="submit" value="Buscar">
             </form>
             <?php

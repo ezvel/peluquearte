@@ -6,11 +6,10 @@ require("../conexion/conectar.php");
 $dni = $_POST['dni'];
 
 
-if($dni = "") {
-    header("location:../pages/operadores/generar_turno.php");
-} else {
-    $sql = "SELECT * FROM usuario WHERE Dni = '$dni';";
 
+    $sql = "SELECT * FROM usuario WHERE Dni = '$dni' AND Id_nivel = 0;";
+
+    
     $consulta = mysqli_query($conexion, $sql);
     
     
@@ -21,9 +20,9 @@ if($dni = "") {
         setcookie("APELLIDO_CLIENTE", $row[2], time()+3600,"/peluquearte/");
         header("location:../pages/operadores/generar_turno.php");
     } else {
+        echo "chau";
         header("location:../pages/operadores/generar_turno.php");
     }
-}
  
 
 

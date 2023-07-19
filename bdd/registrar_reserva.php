@@ -1,6 +1,6 @@
 <?php 
     include("../conexion/conectar.php");
-    
+
     setcookie("DNI_CLIENTE", "", time()+3600,"/peluquearte/");
     setcookie("NOMBRE_CLIENTE", "", time()+3600,"/peluquearte/");
     setcookie("APELLIDO_CLIENTE", "", time()+3600,"/peluquearte/");
@@ -10,6 +10,7 @@
     $hora = $_POST['hora'];
     $reservado = 1;
     $dni_peluquero = $_POST['dni_peluquero'];
+    
 
     $sql_insert = "INSERT INTO reserva (Dni, Dia, Hora, Id_estado, Dni_peluquero, Dni_cliente) VALUES ('$dni','$fecha','$hora','$reservado','$dni_peluquero', '$dni');";
     

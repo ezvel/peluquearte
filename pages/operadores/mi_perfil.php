@@ -99,14 +99,14 @@
         </header>
         <section class="main-contenido main-contenido-centrado">
             <input type="submit" value="Modificar" onclick="activarInput()"> 
-            <form  class="main-form form" action="bdd/actualizar_datos_op.php" method="POST" autocomplete="off">   
+            <form  class="main-form form" action="../../bdd/actualizar_datos_op.php" method="POST" autocomplete="off">   
                 <section class="form__datos" >
                     <section class="form__botones">
                                 
                 </section>
-
+                
                     <?php  
-                    $usuario= $_COOKIE['USUARIO'];
+                    $usuario= $_SESSION['usuario'];
                     $result = mysqli_query($conexion, "SELECT DNI, Nombre, Apellido, Usuario, Contraseña, n.descripcion as nivel FROM usuario as u left join nivel as n on u.Id_nivel= n.id WHERE Usuario = '$usuario'");
                     if ($result) {
                             while ($row = mysqli_fetch_assoc($result)) {
@@ -116,9 +116,12 @@
                                 $usuario = $row['Usuario'];
                                 $contra = $row['Contraseña'];
                                 $nivel = $row['nivel'];
+
                     ?>
-                    <label class="form__label--font-size-grande">DNI </label>
-                     <label ><?php echo $dni?></label>   
+
+                    <label class="form__label--font-size-grande" for="dni">DNI </label>
+                     <label id="dni"><?php echo $dni?></label>
+                     <input type="hidden" name="dni" value="<?php echo $dni; ?>">
                     <label class="form__label--font-size-grande">Nombre</label>
                     <input class="form__input" id="input"type="text" name="nombre" autocomplete="off" value="<?php echo $nom ; ?>" disabled >
                     <label class="form__label--font-size-grande">Apellido</label> 
@@ -145,6 +148,7 @@
             </form>
         </section>
     </main>
+    <script type="text/javascript" src="../../js/modificar.js"></script>
     <script type="text/javascript" src="../../js/formulario.js"></script>
     <script type="text/javascript" src="../../js/toggle-menu.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>

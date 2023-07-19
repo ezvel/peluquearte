@@ -93,7 +93,59 @@
         </ul>
     </nav>
     <main class="main">
+        <header class="main-header">
+            <h2 class="main-header-titulo">Operadores > Mi perfil</h2>
+        </header>
+        <section class="main-contenido main-contenido-centrado">
+            <input type="submit" value="Modificar" onclick="activarInput()"> 
+            <form  class="main-form form" action="../../bdd/actualizar_datos_op.php" method="POST" autocomplete="off">   
+                <section class="form__datos" >
+                    <section class="form__botones">
+                                
+                </section>
+                
+                    <?php  
+                    $usuario= $_SESSION['usuario'];
+                    $result = mysqli_query($conexion, "SELECT DNI, Nombre, Apellido, Usuario, Contraseña, n.descripcion as nivel FROM usuario as u left join nivel as n on u.Id_nivel= n.id WHERE Usuario = '$usuario'");
+                    if ($result) {
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                $dni = $row['DNI'];
+                                $nom = $row['Nombre'];
+                                $ape =$row['Apellido'];
+                                $usuario = $row['Usuario'];
+                                $contra = $row['Contraseña'];
+                                $nivel = $row['nivel'];
+
+                    ?>
+
+                    <label class="form__label--font-size-grande" for="dni">DNI </label>
+                     <label id="dni"><?php echo $dni?></label>
+                     <input type="hidden" name="dni" value="<?php echo $dni; ?>">
+                    <label class="form__label--font-size-grande">Nombre</label>
+                    <input class="form__input" id="input"type="text" name="nombre" autocomplete="off" value="<?php echo $nom ; ?>" disabled >
+                    <label class="form__label--font-size-grande">Apellido</label> 
+                    <input class="form__input" id="input"type="text" name="apellido" autocomplete="off" disabled value="<?php echo $ape ; ?>" >   
+                    <label class="form__label--font-size-grande">Usuario </label>
+                    <input class="form__input" id="input"type="text" name="usuario" autocomplete="off" value= "<?php echo $usuario;  ?>" disabled>   
+                    <label class="form__label--font-size-grande">Contraseña</label>
+                    <input class="form__input" id="input"type="text" name="contraseña" autocomplete="off" disabled value="<?php echo $contra; ?>">   
+                    <label class="form__label--font-size-grande">Nivel</label>
+                    <select class="form__select" name="nivel" disabled>
+                        <option value="<?php echo $nivel; ?>"><?php echo $nivel; ?></option>
+                            <?php
+                            }} else {
+                            echo "Error al hacer la consulta: " . mysqli_error($conexion);
+                            }
+                            ?> 
+                    </select>                      
+                </section>
+                <section class="form__botones">
+                    <input class="form__botones__boton form__botones__boton--enviar" type="submit" value="Enviar">             
+                </section>
+            </form>
+        </section>
     </main>
+    <script type="text/javascript" src="../../js/modificar.js"></script>
     <script type="text/javascript" src="../../js/formulario.js"></script>
     <script type="text/javascript" src="../../js/toggle-menu.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
